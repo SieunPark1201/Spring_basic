@@ -1,0 +1,26 @@
+# .properties를 가독성이 좋은 yml(야믈)로 변경
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    #    mysql엔진중에 일반적으로 많이 사용되는 InnoDB를 사용하겠다는 설정
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #    jpa 설정. ddl을 자동으로 적용하겠다는 설정
+    generate-ddl: true
+    hibernate:
+      #create 옵션은 매번 table을 drop 후 create
+      #update 옵션은 변셩사항만 alter를 적용
+      #현업에서는 validate옵션으로 검증만 하는 경우가 대다수
+      ddl-auto: update
+    #    jpa가 자동으로 쿼리를 생성할때, 쿼리가 console창에 보여지도록 하는 설정.
+    show_sql: true
+
+
+#@Mapper 아래의 데이터들을 찾으러 갈 경로
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
